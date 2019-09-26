@@ -16,9 +16,12 @@ public class Park {
         }
     }
 
-    public boolean pickCar(int leftCar) {
+    public boolean pickCar(int leftCar) throws ParkException {
         if (leftCar == 0) {
             return false;
+        }
+        if (leftCar < 0){
+            throw new ParkException();
         }
         return true;
     }
