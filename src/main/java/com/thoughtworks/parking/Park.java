@@ -17,6 +17,9 @@ public class Park {
     }
 
     public boolean pickCar(int leftCar) {
+        if (leftCar == 0) {
+            return false;
+        }
         return true;
     }
 

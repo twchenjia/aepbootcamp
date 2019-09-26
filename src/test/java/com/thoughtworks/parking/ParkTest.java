@@ -36,4 +36,11 @@ public class ParkTest {
         boolean isPermit = park.pickCar(10);
         assertThat(isPermit,is(true));
     }
+
+    @Test
+    void should_not_pick_out_when_picking_if_parking_lot_car_count_is_equals_zero() {
+        Park park = new Park();
+        boolean isPermit = park.pickCar(0);
+        assertThat(isPermit,is(false));
+    }
 }
