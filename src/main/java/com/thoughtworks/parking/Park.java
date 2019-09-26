@@ -16,6 +16,10 @@ public class Park {
         }
     }
 
+    public boolean pickCar(int leftCar) {
+        return true;
+    }
+
     static class ParkException extends Exception {
 
         public ParkException() {

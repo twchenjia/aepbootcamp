@@ -29,4 +29,11 @@ public class ParkTest {
         Park park = new Park();
         assertThrows(Park.ParkException.class, () -> park.parkCar(2, 1));
     }
+
+    @Test
+    void should_pick_out_when_picking_if_parking_lot_car_count_is_more_than_zero() {
+        Park park = new Park();
+        boolean isPermit = park.pickCar(10);
+        assertThat(isPermit,is(true));
+    }
 }
