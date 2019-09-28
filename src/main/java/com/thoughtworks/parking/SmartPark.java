@@ -1,8 +1,6 @@
 package com.thoughtworks.parking;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class SmartPark {
@@ -30,10 +28,13 @@ public class SmartPark {
 
     public Car pick(Ticket ticket) {
         Park park = getParkByTicket(ticket);
+        if (Objects.isNull(park)) {
+            return null;
+        }
         return park.pickCar(ticket);
     }
 
     private Park getParkByTicket(Ticket ticket) {
-        return Stream.of(this.parks).filter(park -> park.getTicketCarMap().containsKey(ticket)).findFirst().get();
+        return Stream.of(this.parks).filter(park -> park.getTicketCarMap().containsKey(ticket)).findFirst().orElse(null);
     }
 }
