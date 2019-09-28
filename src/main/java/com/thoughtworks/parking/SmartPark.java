@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class SmartPark {
     private Park[] parks;
-    private Map<Car,Park> carParkMap;
+    private Map<Car, Park> carParkMap;
 
     public SmartPark(Park[] parks) {
         this.parks = parks;
@@ -16,7 +16,7 @@ public class SmartPark {
 
     public Ticket park(Car myCar) {
         Park park = getMaxAvailableSizePark(parks);
-        carParkMap.put(myCar,park);
+        carParkMap.put(myCar, park);
         return park.parkCar(myCar);
     }
 
@@ -26,5 +26,14 @@ public class SmartPark {
 
     private Park getMaxAvailableSizePark(Park[] parks) {
         return Stream.of(parks).max(Comparator.comparing(park -> park.getSize() - park.getParkCarSize())).get();
+    }
+
+    public Car pick(Ticket ticket) {
+        Park park = getParkByTicket(ticket);
+        return park.pickCar(ticket);
+    }
+
+    private Park getParkByTicket(Ticket ticket) {
+        return Stream.of(this.parks).filter(park -> park.getTicketCarMap().containsKey(ticket)).findFirst().get();
     }
 }

@@ -30,4 +30,17 @@ public class SmartParkTest {
         Car myCar = new Car();
         assertThrows(ParklotException.class, () -> smartPark.park(myCar));
     }
+
+    @Test
+    void should_return_a_car_when_smart_boy_pick_a_car_with_a_correct_ticket_with_parking_lots_has_some_cars() {
+        Park[] parks = new Park[] {new Park(10),new Park(10)};
+        parks[1].parkCar(new Car());
+        Car myCar = new Car();
+        SmartPark smartPark = new SmartPark(parks);
+        Ticket ticket = smartPark.park(myCar);
+        Car car = smartPark.pick(ticket);
+        assertThat(car, is(myCar));
+    }
+
+
 }
