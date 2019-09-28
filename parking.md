@@ -1,8 +1,8 @@
 ###tasking：
 
-1. 停车，停车场车辆数量小于停车场车辆总数量，可停
-2. 停车，停车场车辆数量等于停车场车辆总数，禁停
-3. 停车，停车场车辆数量大于停车场车辆总数，异常
-4. 取车，停车场车辆数量大于0，可取
-5. 取车，停车场车辆数量等于0，禁取
-6. 取车，停车场车来那个数量小于0，异常
+1. given a park lot with a available space when park a car then return a ticket.
+2. given a park lot with full space when park a car then will be rejected.
+3. given a park lot with some car when pick a car with a ticket then return a car.
+4. given a park lot with some car when pick a car with wrong ticket then will throw exception.
+5. given a park lot with no car when pick a car then will throw exception.
+6. given a park lot with some car when pick a car twice with the same ticket then will return no car.  
