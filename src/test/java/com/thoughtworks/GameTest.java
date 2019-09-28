@@ -1,7 +1,5 @@
 package com.thoughtworks;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,15 +22,10 @@ public class GameTest {
      * 8.指定输入格子数字为1234，返回CONGRATULATION
      */
 
-    private Game game;
-
-    @BeforeClass
-    public void setup() {
-        this.game = new Game("1234");
-    }
 
     @Test
     public void should_return_UNFORTUNATELY_when_guess_5678_given_answer_is_1234() throws Exception {
+        Game game = new Game("1234");
         String ret = game.guess("5678");
         assertThat(ret, is("UNFORTUNATELY"));
     }
@@ -40,36 +33,42 @@ public class GameTest {
 
     @Test
     public void should_return_0A1B_when_guess_4567_given_answer_is_1234() throws Exception {
+        Game game = new Game("1234");
         String ret = game.guess("4567");
         assertThat(ret, is("0A1B"));
     }
 
     @Test
     public void should_return_1A0B_when_guess_1567_given_answer_is_1234() throws Exception {
+        Game game = new Game("1234");
         String ret = game.guess("1567");
         assertThat(ret, is("1A0B"));
     }
 
     @Test
     public void should_return_2A0B_when_guess_1276_given_answer_is_1234() throws Exception {
+        Game game = new Game("1234");
         String ret = game.guess("1276");
         assertThat(ret, is("2A0B"));
     }
 
     @Test
     public void should_return_2A2B_when_guess_1243_given_answer_is_1234() throws Exception {
+        Game game = new Game("1234");
         String ret = game.guess("1243");
         assertThat(ret, is("2A2B"));
     }
 
     @Test
     public void should_return_3A0B_when_guess_1238_given_answer_is_1234() throws Exception {
+        Game game = new Game("1234");
         String ret = game.guess("1238");
         assertThat(ret, is("3A0B"));
     }
 
     @Test
     public void should_return_CONGRATULATION_when_guess_1234_given_answer_is_1234() throws Exception {
+        Game game = new Game("1234");
         String ret = game.guess("1234");
         assertThat(ret, is("CONGRATULATION"));
     }
@@ -77,12 +76,14 @@ public class GameTest {
     @ParameterizedTest
     @ValueSource(strings = {"1233", "1223", "1123"})
     public void should_throw_Exception_when_given_not_four_different_digit(String answer) throws Exception {
+        Game game = new Game("1234");
         assertThrows(Game.NotDiffDigitAnswerException.class, () -> game.guess(answer));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"123", "12345", "1234567"})
     public void should_throw_Exception_when_given_not_four_digit(String answer) throws Exception {
+        Game game = new Game("1234");
         assertThrows(Game.NotFourDigitAnswerException.class, () -> game.guess(answer));
     }
 }
