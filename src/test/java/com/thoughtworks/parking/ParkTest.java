@@ -4,46 +4,60 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkTest {
     @Test
-    void should_park_in_when_parking_if_parking_car_count_is_less_than_parking_position() throws Park.ParkException {
-        Park park = new Park();
-        boolean isPermit = park.parkCar(1, 2);
-        assertThat(isPermit, is(true));
+    void should_return_a_ticket_when_park_a_car_with_parking_lot_has_available_space() {
+        Park park = new Park(4);
+        Car car = new Car();
+        Ticket ticket = park.parkCar(car);
+        assertNotNull(ticket);
     }
 
     @Test
-    void should_not_park_in_when_parking_if_parking_car_count_is_equal_parking_position() throws Park.ParkException {
-        Park park = new Park();
-        boolean isPermit = park.parkCar(10, 10);
-        assertThat(isPermit, is(false));
+    void should_throw_park_lot_exception_when_park_a_car_with_parking_lot_has_no_space() {
+        Car car = new Car();
+        int fullSize = 1;
+        Park park = new Park(fullSize);
+        park.parkCar(new Car());
+        assertThrows(ParklotException.class, () -> park.parkCar(car));
     }
 
     @Test
-    void should_throw_pack_exception_when_parking_if_parking_car_count_is_more_than_parking_position() {
-        Park park = new Park();
-        assertThrows(Park.ParkException.class, () -> park.parkCar(2, 1));
+    void should_return_a_car_when_pick_a_car_with_a_correct_ticket_with_parking_lot_has_some_cars() {
+        Park park = new Park(4);
+        Car myCar = new Car();
+        Ticket ticket = park.parkCar(myCar);
+        Car car = park.pickCar(ticket);
+        assertThat(car, is(myCar));
     }
 
     @Test
-    void should_pick_out_when_picking_if_parking_lot_car_count_is_more_than_zero() throws Park.ParkException {
-        Park park = new Park();
-        boolean isPermit = park.pickCar(10);
-        assertThat(isPermit, is(true));
+    void should_return_no_car_when_pick_a_car_with_a_incorrect_ticket() {
+        Park park = new Park(4);
+        Car myCar = new Car();
+        park.parkCar(myCar);
+        Car car = park.pickCar(new Ticket());
+        assertNull(car);
     }
 
     @Test
-    void should_not_pick_out_when_picking_if_parking_lot_car_count_is_equals_zero() throws Park.ParkException {
-        Park park = new Park();
-        boolean isPermit = park.pickCar(0);
-        assertThat(isPermit, is(false));
+    void should_throw_park_lot_exception_when_pick_a_car_with_parking_lot_has_no_car() {
+        Ticket ticket = new Ticket();
+        int fullSize = 1;
+        Park park = new Park(fullSize);
+        assertThrows(ParklotException.class, () -> park.pickCar(ticket));
     }
 
     @Test
-    void should_throw_park_exception_when_picking_if_parking_lot_car_count_is_less_than_zero() {
-        Park park = new Park();
-        assertThrows(Park.ParkException.class, () -> park.pickCar(-1));
+    void should_return_no_car_when_pick_a_car_with_a_same_ticket_twice() {
+        Park park = new Park(4);
+        Car myCar = new Car();
+        park.parkCar(new Car());
+        Ticket ticket = park.parkCar(myCar);
+        park.pickCar(ticket);
+        Car car = park.pickCar(ticket);
+        assertNull(car);
     }
 }

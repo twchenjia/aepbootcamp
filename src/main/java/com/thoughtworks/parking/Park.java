@@ -1,35 +1,36 @@
 package com.thoughtworks.parking;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Park {
+    private Map<Ticket, Car> ticketCarMap;
+    private int parkCarSize;
+    private int size;
 
-    public Park() {
-
+    public Park(int size) {
+        this.size = size;
+        ticketCarMap = new HashMap<>();
     }
 
-    public boolean parkCar(int car, int position) throws ParkException {
-        if (car < position) {
-            return true;
-        } else if (car == position) {
-            return false;
-        } else {
-            throw new ParkException();
+    public Ticket parkCar(Car car) {
+        this.parkCarSize++;
+
+        if (parkCarSize > size) {
+            throw new ParklotException();
         }
+        Ticket ticket = new Ticket();
+        ticketCarMap.put(ticket, car);
+        return ticket;
     }
 
-    public boolean pickCar(int leftCar) throws ParkException {
-        if (leftCar == 0) {
-            return false;
+    public Car pickCar(Ticket ticket) {
+        this.parkCarSize--;
+        if (parkCarSize < 0) {
+            throw new ParklotException();
         }
-        if (leftCar < 0){
-            throw new ParkException();
-        }
-        return true;
-    }
-
-    static class ParkException extends Exception {
-
-        public ParkException() {
-            super();
-        }
+        Car car = ticketCarMap.get(ticket);
+        ticketCarMap.remove(ticket);
+        return car;
     }
 }
