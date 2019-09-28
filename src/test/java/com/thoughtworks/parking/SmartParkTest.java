@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SmartParkTest {
     @Test
@@ -18,5 +19,15 @@ public class SmartParkTest {
         Park carParkedLot = smartPark.getCarParkedLot(myCar);
         Park mostAvailableSizeParkLot = parks[1];
         assertThat(carParkedLot, is(mostAvailableSizeParkLot));
+    }
+
+    @Test
+    void should_throw_park_lot_exception_when_smart_boy_park_a_car_with_all_parking_lots_has_no_space() {
+        Park[] parks = new Park[]{new Park(1), new Park(1)};
+        parks[0].parkCar(new Car());
+        parks[1].parkCar(new Car());
+        SmartPark smartPark = new SmartPark(parks);
+        Car myCar = new Car();
+        assertThrows(ParklotException.class, () -> smartPark.park(myCar));
     }
 }
