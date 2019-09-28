@@ -8,6 +8,30 @@ public class Park {
     private int parkCarSize;
     private int size;
 
+    public Map<Ticket, Car> getTicketCarMap() {
+        return ticketCarMap;
+    }
+
+    public void setTicketCarMap(Map<Ticket, Car> ticketCarMap) {
+        this.ticketCarMap = ticketCarMap;
+    }
+
+    public int getParkCarSize() {
+        return parkCarSize;
+    }
+
+    public void setParkCarSize(int parkCarSize) {
+        this.parkCarSize = parkCarSize;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     public Park(int size) {
         this.size = size;
         ticketCarMap = new HashMap<>();
