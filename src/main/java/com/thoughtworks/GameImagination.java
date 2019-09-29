@@ -7,6 +7,7 @@ public class GameImagination {
     public static void main(String[] args) {
         System.out.println(guessWord("1234", "1243"));
     }
+
     /**
      * 1234 1267
      */
@@ -17,13 +18,13 @@ public class GameImagination {
             char temp = word.charAt(i);
             if (guessWord.charAt(i) == temp) {
                 posCount++;
-                guessWord =guessWord.replace(temp, ' ');
+                guessWord = guessWord.replace(temp, ' ');
             }
         }
         containCount = countContain(word, guessWord);
         if (posCount == word.length()) {
             return CORRECT_RET;
-        } else if (posCount == 0 && containCount ==0) {
+        } else if (posCount == 0 && containCount == 0) {
             return INCORRECT_RET;
 
         } else {
