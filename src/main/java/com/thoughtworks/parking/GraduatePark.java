@@ -34,6 +34,9 @@ public class GraduatePark {
 
     public Car pick(Ticket ticket) {
         Park park = getParkByTicket(ticket);
+        if (Objects.isNull(park)){
+            return null;
+        }
         return park.pickCar(ticket);
     }
 

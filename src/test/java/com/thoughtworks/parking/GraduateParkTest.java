@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GraduateParkTest {
     @Test
@@ -39,5 +38,15 @@ public class GraduateParkTest {
         Ticket ticket = graduatePark.park(myCar);
         Car car = graduatePark.pick(ticket);
         assertThat(car, is(myCar));
+    }
+
+    @Test
+    void should_return_no_car_when_graduate_boy_pick_a_car_with_a_incorrect_ticket() {
+        Park[] parks = new Park[]{new Park(10), new Park(10)};
+        Car myCar = new Car();
+        GraduatePark graduatePark = new GraduatePark(parks);
+        graduatePark.park(myCar);
+        Car car = graduatePark.pick(new Ticket());
+        assertNull(car);
     }
 }
