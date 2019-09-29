@@ -2,6 +2,7 @@ package com.thoughtworks.parking;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class GraduatePark {
@@ -15,6 +16,9 @@ public class GraduatePark {
 
     public Ticket park(Car myCar) {
         Park sequencedPark = getSequencedPark(parks);
+        if (Objects.isNull(sequencedPark)) {
+            throw new ParklotException();
+        }
         Ticket ticket = sequencedPark.parkCar(myCar);
         carParkMap.put(myCar, sequencedPark);
         return ticket;
