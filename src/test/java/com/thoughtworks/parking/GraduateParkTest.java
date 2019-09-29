@@ -58,4 +58,15 @@ public class GraduateParkTest {
         Car car = graduatePark.pick(ticket);
         assertNull(car);
     }
+
+    @Test
+    void should_return_no_car_when_a_graduate_boy_pick_a_car_with_a_same_ticket_twice() {
+        Park[] parks = new Park[]{new Park(10), new Park(10)};
+        GraduatePark graduatePark = new GraduatePark(parks);
+        Car myCar = new Car();
+        Ticket ticket = graduatePark.park(myCar);
+        graduatePark.pick(ticket);
+        Car car = graduatePark.pick(ticket);
+        assertNull(car);
+    }
 }
