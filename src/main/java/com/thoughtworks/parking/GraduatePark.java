@@ -31,4 +31,13 @@ public class GraduatePark {
     public Park getCarParkedLot(Car myCar) {
         return carParkMap.get(myCar);
     }
+
+    public Car pick(Ticket ticket) {
+        Park park = getParkByTicket(ticket);
+        return park.pickCar(ticket);
+    }
+
+    private Park getParkByTicket(Ticket ticket) {
+        return Stream.of(this.parks).filter(park -> park.getTicketCarMap().containsKey(ticket)).findFirst().orElse(null);
+    }
 }
