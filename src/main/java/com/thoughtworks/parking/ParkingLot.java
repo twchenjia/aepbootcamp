@@ -3,7 +3,7 @@ package com.thoughtworks.parking;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Park {
+public class ParkingLot {
     private Map<Ticket, Car> ticketCarMap;
     private int parkCarSize;
     private int size;
@@ -32,7 +32,7 @@ public class Park {
         this.size = size;
     }
 
-    public Park(int size) {
+    public ParkingLot(int size) {
         this.size = size;
         ticketCarMap = new HashMap<>();
     }
