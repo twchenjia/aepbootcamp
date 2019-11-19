@@ -86,4 +86,9 @@ public class GameTest {
         Game game = new Game("1234");
         assertThrows(Game.NotFourDigitAnswerException.class, () -> game.guess(answer));
     }
+
+    @org.junit.jupiter.api.Test
+    void name2() {
+
+    }
 }
