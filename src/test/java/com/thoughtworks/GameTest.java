@@ -106,4 +106,19 @@ public class GameTest {
     void hotfix() {
 
     }
+
+    @org.junit.jupiter.api.Test
+    void name4() {
+
+    }
+
+    @org.junit.jupiter.api.Test
+    void hotfix() {
+
+    }
+
+    @org.junit.jupiter.api.Test
+    void reabse_test() {
+
+    }
 }
