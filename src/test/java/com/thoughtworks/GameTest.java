@@ -96,4 +96,9 @@ public class GameTest {
     void name3() {
 
     }
+
+    @org.junit.jupiter.api.Test
+    void name4() {
+
+    }
 }
